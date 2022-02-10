@@ -55,14 +55,13 @@ for score in word_scores:
         max_score = score
 
 best_word = wordle_dict[word_scores.index(max_score)]
+print("The best word is %s with a score of %d" % (best_word, max_score))
 # instead of finding ONE best word, let's find ALL best words with the same high-score
 # best_words = []
 # best_words = [word for word in wordle_dict if max_score == word_scores[wordle_dict.index(word)]]
-
-print("The best word is %s with a score of %d" % (best_word, max_score))
-print("But the best words are")
-for word in best_words:
-    print(word)
+# print("But the best words are")
+# for word in best_words:
+#     print(word)
 print("Top scores in the input dictionary:")
 word_scores.sort()
 word_scores.reverse()
