@@ -5,6 +5,7 @@
 
 # Step 2.
 # Assign a score to each word based on how many different letters they have from the subset of most common ones
+# (for future reference: is there a better strategy to follow when taking into account all the rules and constraints?)
 
 # Step 3.
-# Print the best word choice for the input dictionary
+# Print the best starting word for the input dictionary
