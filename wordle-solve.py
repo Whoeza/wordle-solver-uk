@@ -74,3 +74,5 @@ if input("Do you want to print the 10 top words? Type y or Y\n") in ['y', 'Y']:
         curr_score = word_scores[index]
         curr_word = wordle_dict[word_scores.index(curr_score)]
         print("%s    %d" % (curr_word, curr_score))
+
+#  For the future: make an interactive solver, that provides an answer based on which letters have been already used
