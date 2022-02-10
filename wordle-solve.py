@@ -36,9 +36,16 @@ for word in wordle_dict:
     word_scores.insert(len(word_scores), word)
     index_of_this_word = word_scores.index(word)
     word_scores[index_of_this_word] = 0
+    different_letters = []
+    # No further score is added if a letter is seen more than once in the word
     for letter in word:
         if '\n' != letter:
-            word_scores[index_of_this_word] = word_scores[index_of_this_word] + letters_stats[letter]
+            if letter not in different_letters:
+                different_letters.insert(len(different_letters), letter)
+                letter_score_increment = letters_stats[letter]
+            else:
+                letter_score_increment = 0
+            word_scores[index_of_this_word] = word_scores[index_of_this_word] + letter_score_increment
 # Step 3.
 # Print the best starting word for the input dictionary
 
