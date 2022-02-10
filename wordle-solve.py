@@ -4,8 +4,10 @@
 # Initialize some variables
 
 # Counters for each letter that will track how many times this letter is seen in the input dictionary
-letters_stats = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-                 'u', 'v', 'w', 'x', 'y', 'z']
+# letters_stats = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+#                  'u', 'v', 'w', 'x', 'y', 'z']
+letters_stats = {'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0,
+                 'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 0, 'v': 0, 'w': 0, 'x': 0, 'y': 0, 'z': 0}
 for letter in letters_stats:
     letters_stats[letter] = 0
 
@@ -17,10 +19,11 @@ file_name = 'uk-dict.txt'
 wordle_dict = []
 with open(file_name, "r") as dict_file:
     for line in dict_file:
-        wordle_dict.insert(line)
+        wordle_dict.insert(len(wordle_dict), line)
 for word in wordle_dict:
     for letter in word:
-        letters_stats[letter] = letters_stats[letter] + 1
+        if '\n' != letter:
+            letters_stats[letter] = letters_stats[letter] + 1
 
 # Step 2.
 # Assign a score to each word based on how many different letters they have from the subset of most common ones
@@ -30,12 +33,24 @@ for word in wordle_dict:
 # The sum of the # of appearances in the whole dictionary for each letter is the score of the word
 word_scores = []
 for word in wordle_dict:
-    word_scores.insert(word)
-    word_scores[word] = 0
+    word_scores.insert(len(word_scores), word)
+    index_of_this_word = word_scores.index(word)
+    word_scores[index_of_this_word] = 0
     for letter in word:
-        word_scores[word] = word_scores[word] + letters_stats[letter]
-word_scores.sort()
-
+        if '\n' != letter:
+            word_scores[index_of_this_word] = word_scores[index_of_this_word] + letters_stats[letter]
 # Step 3.
 # Print the best starting word for the input dictionary
-print(word_scores[1], word_scores[2], word_scores[3])
+
+max_score = 0
+for score in word_scores:
+    if max_score < score:
+        max_score = score
+
+best_word = wordle_dict[word_scores.index(max_score)]
+
+print("The best word is %s with a score of %d" % (best_word, max_score))
+print("Top scores in the input dictionary:")
+word_scores.sort()
+word_scores.reverse()
+print(word_scores[0], word_scores[1], word_scores[2])
