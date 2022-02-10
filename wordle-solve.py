@@ -25,6 +25,9 @@ for word in wordle_dict:
         if '\n' != letter:
             letters_stats[letter] = letters_stats[letter] + 1
 
+for letter in letters_stats:
+    print(letter, letters_stats[letter])
+
 # Step 2.
 # Assign a score to each word based on how many different letters they have from the subset of most common ones
 # (for future reference: is there a better strategy when taking into account all the rules and constraints of the game?)
